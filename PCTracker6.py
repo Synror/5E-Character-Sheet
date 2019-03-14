@@ -19,7 +19,7 @@ def CodeToText(code, ref):
         print(MD.weaponType[ref])
     else:
         print(MD.startEquip[startingClass][choices][items])
-    
+
 ## name
 ## classlevel
 ## subclass
@@ -50,7 +50,7 @@ try:
 except FileNotFoundError:
     print("That PC was not found,\nCreating New\n")
 ## classlevel
-    ## defining the empty arrays to put data into 
+    ## defining the empty arrays to put data into
     classLevel = [0]*len(MD.classList)
     subclass = [0]*len(MD.classList)
     ## getting a starting class & putting it @ lvl 1
@@ -85,11 +85,10 @@ except FileNotFoundError:
                                                                                             ## to be appeneded / inputted to the right place (TBA)
         else:
             print("")
-                
+
 print("------------------")
 print(name)
 print("The " + MD.raceList[race], end = "")
 for i in range(0,len(classLevel)):
     if classLevel[i] != 0:
         print(" " + str(classLevel[i]) + "" + MD.classList[i])
-            

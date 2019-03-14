@@ -45,9 +45,6 @@ savingThrowList = [[True, False, True, False, False, False],
                    [False, False, False, False, True, True],
                    [False, False, False, True, True, False]]
 
-
-
-
 ## skillname, relatedstat(0-5)
 skillList = [["Acrobatics",0],
               ["Animal Handling",4],
@@ -79,8 +76,8 @@ skillList = [["Acrobatics",0],
 ## info on what stuff each class gets at the start
 startEquip = [[["1Wep17", "1WTy02"],["2Wep03", "1WTy00"],["1Pak04"],["4Wep04"]],
               [["1Wep25", "1Wep21", "1WTy00"],["1Pak01", "1Pak03"],["1Mus00"],["1Wep01"],["1Arm02"]],
-              [["1Wep06", "1Wep30"],["1Arm06", "1Arm02", "1Arm10"]]]
-
+              [["1Wep06", "1Wep30"],["1Arm06", "1Arm02", "1Arm10"],["1Wep33", "1WTy00", "1WTy01"],["1Pak04","1Pak05"]] ##sheild?
+              ]
 
 ## name, weapontype(melee/range&simple/martial or special), (light,other,versitile,twohanded), damage(#D#), damagetype
 weaponType = ["Simple Meelee", "Simple Ranged", "Martial Meelee", "Martial Ranged"]
@@ -143,7 +140,7 @@ armourList = [["Unarmoured", 0, 10, 0, False],
                    ["Plate", 4, 18, 15, True],
                ["Barb's UD", 1, 10, 0, False],
                ["Monk's UD", 1, 10, 0, False]]
-
+print("test")
 for i in range(0,len(weaponList)):
     print(str(i) + " " + weaponList[i][0])
 for i in range(0,len(armourList)):
