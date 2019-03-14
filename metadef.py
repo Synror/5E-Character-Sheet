@@ -71,13 +71,14 @@ skillList = [["Acrobatics",0],
 ## Pak = Pack
 ## Mus = Musical Instument
 ## Arm = Armour
+## Shd = Shield
 ## last 2 numbers are reference to where full info is stored eg 1Wep00 is the 0th place in the array
 
 ## info on what stuff each class gets at the start
 startEquip = [[["1Wep17", "1WTy02"],["2Wep03", "1WTy00"],["1Pak04"],["4Wep04"]],
               [["1Wep25", "1Wep21", "1WTy00"],["1Pak01", "1Pak03"],["1Mus00"],["1Wep01"],["1Arm02"]],
-              [["1Wep06", "1Wep30"],["1Arm06", "1Arm02", "1Arm10"],["1Wep33", "1WTy00", "1WTy01"],["1Pak04","1Pak05"]] ##sheild?
-              ]
+              [["1Wep06", "1Wep30"],["1Arm06", "1Arm02", "1Arm10"],["1Wep33", "1WTy00", "1WTy01"],["1Pak04","1Pak05"],["1Shd00"]], ##divine focus?
+              [["1Wep26", "1WTy00"],["1WTy00","1Wty01","1Shd00"],["1Arm02"]]]
 
 ## name, weapontype(melee/range&simple/martial or special), (light,other,versitile,twohanded), damage(#D#), damagetype
 weaponType = ["Simple Meelee", "Simple Ranged", "Martial Meelee", "Martial Ranged"]
@@ -145,3 +146,5 @@ for i in range(0,len(weaponList)):
     print(str(i) + " " + weaponList[i][0])
 for i in range(0,len(armourList)):
     print(str(i) + " " + armourList[i][0])
+for i in range(0,len(packList)):
+    print(str(i) + " " + packList[i])
