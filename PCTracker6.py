@@ -1,5 +1,4 @@
 ## file for defining all of the things!!
-print("testing")
 import metadef as MD
 
 ## defining a process that lists items
@@ -13,13 +12,18 @@ def ListAndSelect(text, metaRef):
     output = int(input(""))
     return output
 
-def CodeToText(code, ref):
+def CodeToText(CodeIn, offset):
+    offset = offset*6
+    code = CodeIn[1+offset:4+offset]
+    ref = int(CodeIn[4+offset:6+offset])
     if code == "Wep":
-        print(MD.weaponList[ref][0])
+        print(MD.weaponList[ref][0], end="")
     elif code == "WTy":
-        print(MD.weaponType[ref])
+        print(MD.weaponType[ref], end="")
+    elif code == "Arm":
+        print(MD.armourList[ref][0], end="")
     else:
-        print(MD.startEquip[startingClass][choices][items])
+        print(MD.startEquip[startingClass][choices][items], end="")
 
 ## name
 ## classlevel
@@ -80,12 +84,17 @@ except FileNotFoundError:
         if len(MD.startEquip[startingClass][choices]) != 1:                                     ## if there is actually a choice intead of the item being given to you
             for items in range(0,len(MD.startEquip[startingClass][choices])):                       ## for every item that you can choose from list:
                 print(str(items) + " ", end="")                                                         ## index for selection
-                print(MD.startEquip[startingClass][choices][items][0], end="*")                         ## ammount of the item (eg 2 handaxes)
-                CodeToText(MD.startEquip[startingClass][choices][items][1:4],int(MD.startEquip[startingClass][choices][items][4:])) ## and the actual text
+                for groupedItems in range(0,int(len(MD.startEquip[startingClass][choices][items])/6)):     ## for multiple items in one choice (eg figher can take leather and bow in one option)
+                    print(MD.startEquip[startingClass][choices][items][0+groupedItems*6], end="*")                         ## ammount of the item (eg 2 handaxes)
+                    CodeToText(MD.startEquip[startingClass][choices][items], groupedItems)                 ## and the actual text
+                    if groupedItems == (len(MD.startEquip[startingClass][choices][items])/6)-1:
+                        print("")
+                    else:
+                        print(" And ", end="")
             chosenItem = int(input("Select an Item: "))                                             ## and ask for a selection after everthing is listed
                                                                                             ## to be appeneded / inputted to the right place (TBA)
         else:
-            print("")
+            print("tba just give items to PC")
 
 print("------------------")
 print(name)
