@@ -69,24 +69,24 @@ skillList = [["Acrobatics",0],
 ## Wep = Weapon
 ## WTy = Weapon Type
 ## Pak = Pack
-## Mus = Musical Instument
+## Fcs = Focus
 ## Arm = Armour
 ## Shd = Shield
 ## last 2 numbers are reference to where full info is stored eg 1Wep00 is the 0th place in the array
 
 ## info on what stuff each class gets at the start
-startEquip = [[["1Wep17", "1WTy02"],["2Wep03", "1WTy00"],["1Pak04"],["4Wep04"],["1Arm13"]],
-              [["1Wep25", "1Wep21", "1WTy00"],["1Pak01", "1Pak03"],["1Mus00"],["1Wep01"],["1Arm02"]],
-              [["1Wep06", "1Wep30"],["1Arm06", "1Arm02", "1Arm10"],["1Wep33", "1WTy00", "1WTy01"],["1Pak04","1Pak05"],["1Shd00"]], ##divine focus?
-              [["1Wep26", "1WTy00"],["1WTy00","1Wty01","1Shd00"],["1Arm02"],["1Pak04"]],
-              [["1Arm10", "1Arm021Wep35"],["1Wep33","2Wep03"],["1Pak02","1Pak04"]],
-              [["1Wep27", "1WTy00", "1WTy01"],["1Pak02","1Pak04"],["5Wep11"],["5Wep11"],["1Arm14"]], ##monk gets 10 darts but i can't give em a straight 10 so this is the best i got
-              [["1WTy021Shd00","1WTy031Shd00", "1WTy021WTy03", "2Wty02", "2WTy03"],["5Wep04","1WTy00"],["1Pak04","1Pak05"],["1Arm10"]], ## holy symol?
-              [["1Wep00"]], ## ranger UA?
-              [["1Wep25", "1Wep27"],["1Wep12","1Wep27"],["1Pak00","1Pak02","1Pak04"],["1Arm02"],["2Wep01"]], ## theifs tools
-              [["1Wep33","1WTy00","1WTy01"],["1Pak02", "1Pak04"],["2Wep01"]], ## arcane focus or something
-              [["1Wep33", "1WTy00", "1WTy01"],["1Pak02","1Pak06"],["1WTy00", "1WTy01"],["1Arm02"],["2Wep01"]],
-              [["1Wep07","1Wep01"],["1Pak04","1Pak06"]]]
+startEquip = [[["1Wep17", "1WTy02"],["2Wep03", "1WTy00"],["1Pak04"],["4Wep04"],["1Arm13"]],## bard
+              [["1Wep25", "1Wep21", "1WTy00"],["1Pak01", "1Pak03"],["1Fcs00"],["1Wep01"],["1Arm02"]],## bard
+              [["1Wep06", "1Wep30"],["1Arm06", "1Arm02", "1Arm10"],["1Wep33", "1WTy00", "1WTy01"],["1Pak04","1Pak05"],["1Fcs01"],["1Shd00"]], ## cleric
+              [["1Wep26", "1WTy00"],["1WTy00","1Wty01","1Shd00"],["1Arm02"],["1Pak04"],["1Fcs03"]],## druid
+              [["1Arm10", "1Arm021Wep35"],["1Wep33","2Wep03"],["1Pak02","1Pak04"]],## cleric
+              [["1Wep27", "1WTy00", "1WTy01"],["1Pak02","1Pak04"],["5Wep11"],["5Wep11"],["1Arm14"]], ##fihter
+              [["1WTy021Shd00","1WTy031Shd00", "1WTy021WTy03", "2Wty02", "2WTy03"],["5Wep04","1WTy00"],["1Pak04","1Pak05"],["1Fcs01"],["1Arm10"]], ## Paladin
+              [["1Arm06","1Arm02"],["2Wep27","2Wty00"],["1Pak02","1Pak04"],["1Wep35"]], ## ranger UA!
+              [["1Wep25", "1Wep27"],["1Wep12","1Wep27"],["1Pak00","1Pak02","1Pak04"],["1Arm02"],["2Wep01"]], ## rouge
+              [["1Wep33","1WTy00","1WTy01"],["1Pak02", "1Pak04"],["2Wep01"],["1Pak03","1Pak04"]], ## sorcerer
+              [["1Wep33", "1WTy00", "1WTy01"],["1Pak02","1Pak06"],["1WTy00", "1WTy01"],["1Arm02"],["2Wep01"],["1Pak03","1Pak04"]],## warlock
+              [["1Wep07","1Wep01"],["1Pak04","1Pak06"],["1Pak03","1Pak04"]]]## wizard
 
 ## name, weapontype(melee/range&simple/martial or special), (light,other,versitile,twohanded), damage(#D#), damagetype
 weaponType = ["Simple Meelee", "Simple Ranged", "Martial Meelee", "Martial Ranged"]
@@ -132,7 +132,7 @@ weaponList = [["Club", 0, 0, "1d4", "Bludgeon"],
 packList = ["Burgalar's","Diplomat's","Dungeoneer's","Entertainer's","Explorer's","Priest's","Scholar's"]
 
 ## music insturment / Arcane focus / component pouch / divine focus
-
+focusList = ["Musical Insturment", "Holy Symbol", "Druidic Focus", "Arcane Focus", "Component Pouch"]
 ## name, type(unarmoured,UD,Light,Med,Heavy) ((for working out dex bonus)), baseAC, StrRequirement, StelthDisad(Bool)
 armourList = [["Unarmoured", 0, 10, 0, False],
                   ["Padded", 2, 11, 0, True],
