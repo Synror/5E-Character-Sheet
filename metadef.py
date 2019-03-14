@@ -1,4 +1,3 @@
-print("Test")
 menuList = ["Print Character Sheet","Level Up!", "Buy & Sell Equipment", "Save & Quit"]
 
 classList = ["Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rouge","Sorcerer","Warlock","Wizard"]
@@ -144,3 +143,8 @@ armourList = [["Unarmoured", 0, 10, 0, False],
                    ["Plate", 4, 18, 15, True],
                ["Barb's UD", 1, 10, 0, False],
                ["Monk's UD", 1, 10, 0, False]]
+
+for i in range(0,len(weaponList)):
+    print(str(i) + " " + weaponList[i][0])
+for i in range(0,len(armourList)):
+    print(str(i) + " " + armourList[i][0])
