@@ -1,4 +1,5 @@
 ## file for defining all of the things!!
+print("testing")
 import metadef as MD
 
 ## defining a process that lists items
