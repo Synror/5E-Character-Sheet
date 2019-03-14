@@ -22,6 +22,8 @@ def CodeToText(CodeIn, offset):
         print(MD.weaponType[ref], end="")
     elif code == "Arm":
         print(MD.armourList[ref][0], end="")
+    elif code == "Pak":
+        print(MD.packList[ref] + " Pack", end="")
     else:
         print(MD.startEquip[startingClass][choices][items], end="")
 
