@@ -1,4 +1,5 @@
-menuList = ["Print Character Sheet","Level Up!", "Buy & Sell Equipment", "Save & Quit"] 
+print("Test")
+menuList = ["Print Character Sheet","Level Up!", "Buy & Sell Equipment", "Save & Quit"]
 
 classList = ["Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rouge","Sorcerer","Warlock","Wizard"]
 
@@ -45,7 +46,7 @@ savingThrowList = [[True, False, True, False, False, False],
                    [False, False, False, False, True, True],
                    [False, False, False, True, True, False]]
 
-              
+
 
 
 ## skillname, relatedstat(0-5)
