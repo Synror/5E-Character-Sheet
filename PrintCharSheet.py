@@ -9,6 +9,17 @@ def printSpace(introText, variableText, length):
     )
     for i in range(0,(length-len(introText)-len(variableText))):
         print(" ", end="")
+
+def printSideBySide(printListA, printListB, fullLength):
+    if len(printListA) == len(printListB): ## check that they are the same length
+        for i in range(printListA): ## for each line needed
+            for j in range(0,1): ## for each printList (1/2 a line)
+                if j == 0:
+                    printSpace(printListA[i], fullLength/2) ## print first half
+                else:
+                    printSpace(printListB[i], fullLength/2) ## or seccond half
+
+
 name = "Deekek"
 classlist = "6/Sorcerer"
 background = "Merchant"
