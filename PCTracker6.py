@@ -44,15 +44,25 @@ def CodeAppend(CodeIn):
                 weapons.append([amount,ref]) ## add it
         if code == "Arm": ## don't get multiple armour so this flys :)
             armour = ref
-## name
-## classlevel
-## subclass
-## race
-## subrace
-## background
-## alignment
-## ability scores (without any other bonuses)
-## starting equipment (Class)
+
+def SaveAndQuit():
+    ## classlevel
+    print(classLevel)
+    FH.write(str(classLevel) + "\n")
+    ## subclass
+    FH.writelines(str(subclass) + "\n")
+    ## race
+    FH.writelines(str(race) + "\n")
+    ## subrace
+    FH.writelines(str(subrace) + "\n")
+    ## background
+    ## alignment
+    ## ability scores (without any other bonuses)
+    FH.writelines(str(abilityScores) + "\n")
+    ## starting equipment (Class)
+    FH.writelines(str(weapons) + "\n")
+    FH.writelines(str(armour) + "\n")
+
 ##     weapons armour packs and tools
 
 ## HP Roles (only input on level up)
@@ -96,6 +106,12 @@ except FileNotFoundError:
 
 ## background
 ## alignment
+    abilityScores = [0,0,0,0,0,0]
+    print("Ability Scores (H3/4d6)")
+    print(len(MD.statList))
+    for i in range(0,6):
+        abilityScores[i] = input(MD.statList[i] + ": ")
+    print(abilityScores)
 
 ## ability scores (without any other bonuses)
 ## starting equipment (Class)
@@ -128,8 +144,6 @@ except FileNotFoundError:
             ## eg pack rouge's leather and daggers together
         CodeAppend(MD.startEquip[startingClass][choices][chosenItem]) ## add that equipment into the list
 
-print(weapons)
-
 go = True
 while go:
     print("------------------")
@@ -138,7 +152,6 @@ while go:
         print("look i haven't got this far yet, gimme some time and i'll get back to it :/")
     if menu == 3:
         FH = open(name+".txt", "w")
-        FH.writelines("testing\n")
-        FH.writelines("more\ntesting")
+        SaveAndQuit()
         FH.close()
         go = False
