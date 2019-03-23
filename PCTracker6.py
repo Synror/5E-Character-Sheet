@@ -1,5 +1,6 @@
 ## file for defining all of the things!!
 import metadef as MD
+import json
 
 ## defining a process that lists items
 ## and returns int that user has inputted,
@@ -47,10 +48,10 @@ def CodeAppend(CodeIn):
 
 def SaveAndQuit():
     ## classlevel
-    print(classLevel)
     FH.write(str(classLevel) + "\n")
     ## subclass
     FH.writelines(str(subclass) + "\n")
+    FH.writelines(str(startingClass) + "\n")
     ## race
     FH.writelines(str(race) + "\n")
     ## subrace
@@ -81,7 +82,16 @@ print("D&D 5e Character Sheet Tracker")
 name = input("Name a Character to Load:\n")
 try:
     FH = open(name+".txt", "r")
+    classLevel = json.loads(FH.readline())
+    subclass = json.loads(FH.readline())
+    startingClass = int(FH.readline())
+    race = int(FH.readline())
+    subrace = int(FH.readline())
+    abilityScores = json.loads(FH.readline())
+    weapons = json.loads("[[1,2]]")
+    armour = int(FH.readline())
     FH.close()
+
 except FileNotFoundError:
     print("That PC was not found,\nCreating New\n")
 ## classlevel
@@ -110,7 +120,7 @@ except FileNotFoundError:
     print("Ability Scores (H3/4d6)")
     print(len(MD.statList))
     for i in range(0,6):
-        abilityScores[i] = input(MD.statList[i] + ": ")
+        abilityScores[i] = int(input(MD.statList[i] + ": "))
     print(abilityScores)
 
 ## ability scores (without any other bonuses)

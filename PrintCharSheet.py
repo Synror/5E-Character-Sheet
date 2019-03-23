@@ -19,21 +19,37 @@ def printSideBySide(printListA, printListB, fullLength):
                 else:
                     printSpace(printListB[i], fullLength/2) ## or seccond half
 
+def divider(topSpace, botSpace):
+    print("├", end="")
+    for i in range(1,120):
+        if(i%botSpace == 0 and i%topSpace == 0):
+            print("┼", end="")
+        elif(i%botSpace == 0):
+            print("┬", end="")
+        elif(i%topSpace == 0):
+            print("┴", end="")
+        else:
+            print("─", end="")
+    print("┤")
 
-name = "Deekek"
-classlist = "6/Sorcerer"
-background = "Merchant"
-## full length is 120
-print("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐")
+def printCharSheet(name):
+    FH = open(name+".txt", "r")
+    classlist = "6/Sorcerer"
+    background = "Merchant"
+    ## full length is 121 -1 for the end =120 that divides nicely
+    print("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐")
 
-printSpace("Name: ", name, 120) #120
-print("│")
+    printSpace("Name: ", name, 40) #120
+    printSpace("Class: ", classlist, 80)
+    print("│")
 
-printSpace("Class: ", classlist, 60)
-printSpace("","",60)
-print("│")
+    print("├─────────────────────────────┬─────────┴───────────────────┬─────────────────────────────┬─────────────────────────────┤")
+    #divider(40,30)
 
-printSpace("Background: ", background, 40)
-printSpace("","",40)
-printSpace("","",40)
-print("│")
+    printSpace("Background: ", background, 30)
+    printSpace("","",30)
+    printSpace("","",30)
+    printSpace("","",30)
+    print("│")
+
+printCharSheet("Deekek")
