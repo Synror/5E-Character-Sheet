@@ -3,11 +3,20 @@
 ## ├┼┤╞╪╡╟╫╢╠╬╣
 ## └┴┘╙╨╜╘╧╛╚╩╝
 ## hear me out on this one, i'm gonna make a sperate file for printing the character sheet itself and its gonna be this long ;)
-def printSpace(introText, variableText, length):
+import math
+
+## format number
+def FormNum(inNumber):
+    if inNumber > -1:
+        return "+" + str(inNumber)
+    else:
+        return str(inNumber)
+
+def printSpace(text, length):
     length -= 1
-    print("│" + introText + variableText, end=""
+    print("│" + text, end=""
     )
-    for i in range(0,(length-len(introText)-len(variableText))):
+    for i in range(0,(length-len(text))):
         print(" ", end="")
 
 def printSideBySide(printListA, printListB, fullLength):
@@ -33,23 +42,62 @@ def divider(topSpace, botSpace):
     print("┤")
 
 def printCharSheet(name):
-    FH = open(name+".txt", "r")
-    classlist = "6/Sorcerer"
-    background = "Merchant"
-    ## full length is 121 -1 for the end =120 that divides nicely
-    print("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐")
 
-    printSpace("Name: ", name, 40) #120
-    printSpace("Class: ", classlist, 80)
+    ##  get from FH or pass into Function?
+    classlist = "6/Sorcerer"
+    race = "Aarakocra"
+    background = "Merchant"
+    abilityScores = [6, 13, 14, 13, 12, 16]
+    savingThrows = [False, False, True, False, False, True]
+    Prof = 3
+
+    ## full length is 121 -1 for the end =120 that divides nicely
+    print("┌───────────────────────────────────────┬───────────────────────────────────────────────────────────────────────────────┐")
+
+    printSpace("Name: " + str(name), 40) #120
+    printSpace("Level/Class: " + str(classlist), 80)
     print("│")
 
     print("├─────────────────────────────┬─────────┴───────────────────┬─────────────────────────────┬─────────────────────────────┤")
     #divider(40,30)
 
-    printSpace("Background: ", background, 30)
-    printSpace("","",30)
-    printSpace("","",30)
-    printSpace("","",30)
+    printSpace("Race: "+ str(race), 30)
+    printSpace("Background: " + str(background), 30)
+    printSpace("", 30)
+    printSpace("", 30)
     print("│")
 
+    divider(30, 40)
+
+    ## i'm gonna store all of the stuff in this array
+    ## so that there are 3 coloums that work nicely together
+    toPrint = [[],[],[]]
+
+    toPrint[0].append("Ability Scores, Mods and Saves")
+    scoreNames = ["Str", "Dex","Con","Int","Wiz","Cha"]
+    for i in range(0, len(scoreNames)):
+        Score = abilityScores[i]
+        if Score < 10:
+            Score = "0" + str(Score)
+        else:
+            Score = str(Score)
+        Mod = int(abilityScores[i]/2)-5
+        Save = Mod
+        if savingThrows[i]:
+            Save = Save + Prof
+
+        toPrint[0].append(scoreNames[i] + ":    " + str(Score) + "      " + FormNum(Mod) + "       " + FormNum(Save))
+
+
+    ## and now we print everything that was appended to toPrint !!
+    for row in range(0,15):
+        for col in range(0,3):
+            try:
+                printSpace(toPrint[col][row], 40)
+            except IndexError:
+                printSpace("",40)
+        print("│")
+
+    print("└───────────────────────────────────────┴───────────────────────────────────────┴───────────────────────────────────────┘")
 printCharSheet("Deekek")
+## └┴┘╙╨╜╘╧╛╚╩╝
