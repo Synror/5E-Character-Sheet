@@ -4,13 +4,7 @@
 ## └┴┘╙╨╜╘╧╛╚╩╝
 ## hear me out on this one, i'm gonna make a sperate file for printing the character sheet itself and its gonna be this long ;)
 import math
-
-## format number
-def FormNum(inNumber):
-    if inNumber > -1:
-        return "+" + str(inNumber)
-    else:
-        return str(inNumber)
+import metadef as MD
 
 def printSpace(text, length):
     length -= 1
@@ -19,16 +13,8 @@ def printSpace(text, length):
     for i in range(0,(length-len(text))):
         print(" ", end="")
 
-def printSideBySide(printListA, printListB, fullLength):
-    if len(printListA) == len(printListB): ## check that they are the same length
-        for i in range(printListA): ## for each line needed
-            for j in range(0,1): ## for each printList (1/2 a line)
-                if j == 0:
-                    printSpace(printListA[i], fullLength/2) ## print first half
-                else:
-                    printSpace(printListB[i], fullLength/2) ## or seccond half
-
 def divider(topSpace, botSpace):
+    print("│")
     print("├", end="")
     for i in range(1,120):
         if(i%botSpace == 0 and i%topSpace == 0):
@@ -41,63 +27,75 @@ def divider(topSpace, botSpace):
             print("─", end="")
     print("┤")
 
-def printCharSheet(name):
+def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abilityScores, weapons, armour):
 
-    ##  get from FH or pass into Function?
-    classlist = "6/Sorcerer"
-    race = "Aarakocra"
-    background = "Merchant"
-    abilityScores = [6, 13, 14, 13, 12, 16]
-    savingThrows = [False, False, True, False, False, True]
-    Prof = 3
+    ## some calculatables: inc total char level, spellcasting level? &  proficency bonus
+    charLevel = 0
+    for i in range(0,len(classLevel)):
+        charLevel += classLevel[i]
+    prof = math.floor((charLevel-1)/4)+2
 
     ## full length is 121 -1 for the end =120 that divides nicely
-    print("┌───────────────────────────────────────┬───────────────────────────────────────────────────────────────────────────────┐")
+    print("┌───────────────────────────────────────┬───────────────────────────────────────┬───────────────────────────────────────┐")
 
-    printSpace("Name: " + str(name), 40) #120
-    printSpace("Level/Class: " + str(classlist), 80)
-    print("│")
+    classText = ""
+    for i in range(0,len(MD.classList)):
+        if i == startingClass:
+            classText = str(classLevel[i]) + "/" + MD.classList[i] + classText
+        elif classLevel[i] < 0:
+            classText = classText + str(classLevel[i]) + "/" + MD.classList[i]
 
-    print("├─────────────────────────────┬─────────┴───────────────────┬─────────────────────────────┬─────────────────────────────┤")
-    #divider(40,30)
+    printSpace("Name: " + str(name), 40) # adds up to 120
+    printSpace("Race: " + str(MD.raceList[race]), 40)
+    printSpace("Background: N/A", 40)
 
-    printSpace("Race: "+ str(race), 30)
-    printSpace("Background: " + str(background), 30)
-    printSpace("", 30)
-    printSpace("", 30)
-    print("│")
+    divider(40, 120)
 
-    divider(30, 40)
+    printSpace("Level/Class: " + str(classText), 120)
 
-    ## i'm gonna store all of the stuff in this array
-    ## so that there are 3 coloums that work nicely together
-    toPrint = [[],[],[]]
+    divider(120,20)
 
-    toPrint[0].append("Ability Scores, Mods and Saves")
-    scoreNames = ["Str", "Dex","Con","Int","Wiz","Cha"]
-    for i in range(0, len(scoreNames)):
-        Score = abilityScores[i]
-        if Score < 10:
-            Score = "0" + str(Score)
+    for i in range(0,len(abilityScores)):
+        abilityPrint = MD.statList[i] + ": " ## Str: Dex: Con: Int: Wiz: Cha:
+        if abilityScores[i] < 10:
+            abilityPrint = abilityPrint + "0" ## add a zero if the score is 9 or below
+        abilityPrint = abilityPrint + str(abilityScores[i]) ## add the actual score
+        ## base mod calculate
+        baseMod = math.floor(abilityScores[i]/2)-5
+        abilityPrint = abilityPrint + " " ## whitespace
+        if baseMod > -1:
+            abilityPrint = abilityPrint + "+"
+        abilityPrint = abilityPrint + str(baseMod) ## the actual modifier
+
+        if MD.savingThrowList[startingClass][i]: ## if there's a bonus to saving throw
+            savethrowMod = baseMod + prof
+            abilityPrint = abilityPrint + " ("
+            if savethrowMod > -1:
+                abilityPrint = abilityPrint + "+"
+
+            abilityPrint = abilityPrint + str(savethrowMod)
+            abilityPrint = abilityPrint + ")"
+
+        printSpace(abilityPrint, 20)
+
+    divider(20,20)
+
+    for i in range(0,len(MD.skillList)):
+        if i % 6 == 0 and i != 0:
+            print("│")
+
+        ## MD.skillList[1] gives number for which mod to use
+        ## then we just use the floor(score/2)-5
+        skillMod = math.floor(abilityScores[MD.skillList[i][1]]/2)-5
+        ## positive or negative, convert to string
+        if skillMod > 0:
+            skillMod = "+" + str(skillMod)
         else:
-            Score = str(Score)
-        Mod = int(abilityScores[i]/2)-5
-        Save = Mod
-        if savingThrows[i]:
-            Save = Save + Prof
+            skillMod = str(skillMod)
+        ## and print!
+        printSpace(MD.skillList[i][0], 16)
+        printSpace(skillMod, 4)
 
-        toPrint[0].append(scoreNames[i] + ":    " + str(Score) + "      " + FormNum(Mod) + "       " + FormNum(Save))
+    divider(20,120)
 
-
-    ## and now we print everything that was appended to toPrint !!
-    for row in range(0,15):
-        for col in range(0,3):
-            try:
-                printSpace(toPrint[col][row], 40)
-            except IndexError:
-                printSpace("",40)
-        print("│")
-
-    print("└───────────────────────────────────────┴───────────────────────────────────────┴───────────────────────────────────────┘")
-printCharSheet("Deekek")
-## └┴┘╙╨╜╘╧╛╚╩╝
+    ## print("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")

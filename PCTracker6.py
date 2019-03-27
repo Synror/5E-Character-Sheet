@@ -1,6 +1,7 @@
 ## file for defining all of the things!!
 import metadef as MD
 import json
+from PrintCharSheet import charSheetPrint
 
 ## defining a process that lists items
 ## and returns int that user has inputted,
@@ -64,20 +65,6 @@ def SaveAndQuit():
     FH.writelines(str(weapons) + "\n")
     FH.writelines(str(armour) + "\n")
 
-##     weapons armour packs and tools
-
-## HP Roles (only input on level up)
-
-## (calculatable things)
-## prof bonus (Combined Level)
-## saving throws (Starting Class)
-## passive perception
-## armour class (Armour & Shield)
-## speed (Race & Charger Feat)
-## features and traits (Class Levels)
-## ------------------------------------------------------
-
-## name
 print("D&D 5e Character Sheet Tracker")
 name = input("Name a Character to Load:\n")
 try:
@@ -88,7 +75,7 @@ try:
     race = int(FH.readline())
     subrace = int(FH.readline())
     abilityScores = json.loads(FH.readline())
-    weapons = json.loads("[[1,2]]")
+    weapons = json.loads(FH.readline())
     armour = int(FH.readline())
     FH.close()
 
@@ -155,11 +142,11 @@ except FileNotFoundError:
         CodeAppend(MD.startEquip[startingClass][choices][chosenItem]) ## add that equipment into the list
 
 go = True
-while go:
+while go: ## the main loop
     print("------------------")
     menu = ListAndSelect("Menu Option", MD.menuList)
     if menu == 0:
-        print("look i haven't got this far yet, gimme some time and i'll get back to it :/")
+        charSheetPrint(name, classLevel, subclass, startingClass, race, subrace, abilityScores, weapons, armour)
     if menu == 3:
         FH = open(name+".txt", "w")
         SaveAndQuit()
