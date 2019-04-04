@@ -133,7 +133,7 @@ packList = ["Burgalar's","Diplomat's","Dungeoneer's","Entertainer's","Explorer's
 
 ## music insturment / Arcane focus / component pouch / divine focus
 focusList = ["Musical Insturment", "Holy Symbol", "Druidic Focus", "Arcane Focus", "Component Pouch"]
-## name, type(unarmoured,UD,Light,Med,Heavy) ((for working out dex bonus)), baseAC, StrRequirement, StelthDisad(Bool)
+## name, type(unarmoured,UD,Light,Med,Heavy) ((for working out dex bonus)), baseAC, StrRequirement, StelthDisad(Bool), UDBonus, UD allowes shield
 armourList = [["Unarmoured", 0, 10, 0, False],
                   ["Padded", 2, 11, 0, True],
                  ["Leather", 2, 11, 0, False],
@@ -147,5 +147,5 @@ armourList = [["Unarmoured", 0, 10, 0, False],
               ["Chain Mail", 4, 16, 13, True],
                   ["Splint", 4, 17, 15, True],
                    ["Plate", 4, 18, 15, True],
-               ["Barb's UD", 1, 10, 0, False],
-               ["Monk's UD", 1, 10, 0, False]]
+               ["Barb's UD", 1, 10, 0, False, 2, 1],
+               ["Monk's UD", 1, 10, 0, False, 4, 0]]

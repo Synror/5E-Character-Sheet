@@ -27,6 +27,8 @@ def CodeToText(CodeIn, offset):
         print(MD.armourList[ref][0], end="")
     elif code == "Pak":
         print(MD.packList[ref] + " Pack", end="")
+    elif code == "Shd":
+        print("Shield", end="")
     else:
         print(MD.startEquip[startingClass][choices][items], end="")
 
@@ -46,6 +48,9 @@ def CodeAppend(CodeIn):
                 weapons.append([amount,ref]) ## add it
         if code == "Arm": ## don't get multiple armour so this flys :)
             armour = ref
+        if code == "Shd":
+            shield = 1
+
 
 def SaveAndQuit():
     ## classlevel
@@ -64,6 +69,7 @@ def SaveAndQuit():
     ## starting equipment (Class)
     FH.writelines(str(weapons) + "\n")
     FH.writelines(str(armour) + "\n")
+    FH.writelines(str(shield) + "\n")
 
 print("D&D 5e Character Sheet Tracker")
 name = input("Name a Character to Load:\n")
@@ -77,6 +83,7 @@ try:
     abilityScores = json.loads(FH.readline())
     weapons = json.loads(FH.readline())
     armour = int(FH.readline())
+    shield = int(FH.readline())
     FH.close()
 
 except FileNotFoundError:
@@ -114,6 +121,8 @@ except FileNotFoundError:
 ## starting equipment (Class)
     weapons = []
     armour = 0
+    shield = 0
+
     for choices in range(0,len(MD.startEquip[startingClass])):                                  ## for each choice of equipment
         if len(MD.startEquip[startingClass][choices]) != 1:                                     ## if there is actually a choice intead of the item being given to you
             for items in range(0,len(MD.startEquip[startingClass][choices])):                       ## for every item that you can choose from list:
@@ -146,7 +155,7 @@ while go: ## the main loop
     print("------------------")
     menu = ListAndSelect("Menu Option", MD.menuList)
     if menu == 0:
-        charSheetPrint(name, classLevel, subclass, startingClass, race, subrace, abilityScores, weapons, armour)
+        charSheetPrint(name, classLevel, subclass, startingClass, race, subrace, abilityScores, weapons, armour, shield)
     if menu == 3:
         FH = open(name+".txt", "w")
         SaveAndQuit()

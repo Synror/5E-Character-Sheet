@@ -27,7 +27,7 @@ def divider(topSpace, botSpace):
             print("─", end="")
     print("┤")
 
-def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abilityScores, weapons, armour):
+def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abilityScores, weapons, armour, shield):
 
     ## some calculatables: inc total char level, spellcasting level? &  proficency bonus
     charLevel = 0
@@ -97,5 +97,35 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
         printSpace(skillMod, 4)
 
     divider(20,120)
+    intAC = MD.armourList[armour][2] ## base AC
+    stringAC = "Armour Class: (" + MD.armourList[armour][0] + ") " + str(MD.armourList[armour][2]) + " Base"
+
+    ## dex modifiers
+    if MD.armourList[armour][1] != 4:                               ## don't apply dex to heavy armour
+        dexACBonus = math.floor(abilityScores[1]/2)-5               ## set the bonus
+        if MD.armourList[armour][1] == 1 and dexACBonus > 2:        ## max of 2 on Med amrour
+            dexACBonus = 2
+
+        ## the actuall process of adding the bonus
+        intAC += dexACBonus
+        stringAC = stringAC + " "
+        if dexACBonus > 0:
+            stringAC = stringAC + "+"
+        stringAC = stringAC + str(dexACBonus) + " Dex"
+
+    ## Unarmoured Defence
+    if MD.armourList[armour][1] == 1:
+        print("got here")
+        UDACBonus = math.floor(abilityScores[MD.armourList[armour][5]]/2)-5
+        intAC += UDACBonus
+        stringAC = stringAC + " +" +  str(UDACBonus) + " UD"
+
+    #shield
+    if shield:
+        intAC += 2
+        stringAC = stringAC + " +2 Shield"
+
+    printSpace(stringAC + " = " + str(intAC) + " AC", 120)
+    print("│")
 
     ## print("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")
