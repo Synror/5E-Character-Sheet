@@ -115,16 +115,21 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
 
     ## Unarmoured Defence
     if MD.armourList[armour][1] == 1:
-        print("got here")
         UDACBonus = math.floor(abilityScores[MD.armourList[armour][5]]/2)-5
         intAC += UDACBonus
         stringAC = stringAC + " +" +  str(UDACBonus) + " UD"
 
     #shield
     if shield:
-        intAC += 2
-        stringAC = stringAC + " +2 Shield"
-
+        if MD.armourList[armour][1] != 1:
+            intAC += 2
+            stringAC = stringAC + " +2 Shield"
+        else:
+            if MD.armourList[armour][6]:
+                intAC += 2
+                stringAC = stringAC + " +2 Shield"
+            else:
+                stringAC = stringAC + " +0 Sheild"
     printSpace(stringAC + " = " + str(intAC) + " AC", 120)
     print("│")
 
