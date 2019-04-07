@@ -6,10 +6,9 @@
 import math
 import metadef as MD
 
-def printSpace(text, length):
+def printSpace(text, length, startChar = "│"):
     length -= 1
-    print("│" + text, end=""
-    )
+    print(startChar + text, end="")
     for i in range(0,(length-len(text))):
         print(" ", end="")
 
@@ -55,6 +54,7 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
 
     divider(120,20)
 
+    ##Ability Scores
     for i in range(0,len(abilityScores)):
         abilityPrint = MD.statList[i] + ": " ## Str: Dex: Con: Int: Wiz: Cha:
         if abilityScores[i] < 10:
@@ -80,6 +80,7 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
 
     divider(20,20)
 
+    ## Skills
     for i in range(0,len(MD.skillList)):
         if i % 6 == 0 and i != 0:
             print("│")
@@ -94,9 +95,11 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
             skillMod = str(skillMod)
         ## and print!
         printSpace(MD.skillList[i][0], 16)
-        printSpace(skillMod, 4)
+        printSpace(skillMod, 4, ":")
 
     divider(20,120)
+
+    ## Armour Class
     intAC = MD.armourList[armour][2] ## base AC
     stringAC = "Armour Class: (" + MD.armourList[armour][0] + ") " + str(MD.armourList[armour][2]) + " Base"
 
@@ -131,6 +134,12 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
             else:
                 stringAC = stringAC + " +0 Sheild"
     printSpace(stringAC + " = " + str(intAC) + " AC", 120)
+    divider(120, 120)
+
+    ## weapons
+    printSpace("Weapons", 120)
     print("│")
+
+
 
     ## print("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")
