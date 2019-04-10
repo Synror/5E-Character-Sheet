@@ -79,8 +79,8 @@ startEquip = [[["1Wep17", "1WTy02"],["2Wep03", "1WTy00"],["1Pak044Wep041Arm13"]]
               [["1Wep25", "1Wep21", "1WTy00"],["1Pak01", "1Pak03"],["1Fcs001Wep011Arm02"]],## bard
               [["1Wep06", "1Wep30"],["1Arm06", "1Arm02", "1Arm10"],["1Wep33", "1WTy00", "1WTy01"],["1Pak04","1Pak05"],["1Fcs011Shd00"]], ## cleric
               [["1Wep26", "1WTy00"],["1WTy00","1Wty01","1Shd00"],["1Arm021Pak041Fcs03"]],## druid
-              [["1Arm10", "1Arm021Wep35"],["1Wep33","2Wep03"],["1Pak02","1Pak04"]],## monk
-              [["1Wep27", "1WTy00", "1WTy01"],["1Pak02","1Pak04"],["5Wep11"],["5Wep11"],["1Arm14"]], ##Fighter
+              [["1Arm10", "1Arm021Wep35"],["1Wep33","2Wep03"],["1Pak02","1Pak04"]],## fighter
+              [["1Wep27", "1WTy00", "1WTy01"],["1Pak02","1Pak04"],["5Wep115Wep111Arm14"]], ##monk
               [["1WTy021Shd00","1WTy031Shd00", "1WTy021WTy03", "2Wty02", "2WTy03"],["5Wep04","1WTy00"],["1Pak04","1Pak05"],["1Fcs01"],["1Arm10"]], ## Paladin
               [["1Arm06","1Arm02"],["2Wep27","2Wty00"],["1Pak02","1Pak04"],["1Wep35"]], ## ranger UA!
               [["1Wep25", "1Wep27"],["1Wep12","1Wep27"],["1Pak00","1Pak02","1Pak04"],["1Arm022Wep01"]], ## rouge

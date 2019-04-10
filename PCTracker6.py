@@ -5,32 +5,46 @@ from PrintCharSheet import charSheetPrint
 
 ## defining a process that lists items
 ## and returns int that user has inputted,
-def ListAndSelect(text, metaRef):
-    print("Choose a " + text)
-    for i in range(0,len(metaRef)):
+def ListAndSelect(text, metaRef, CTT = 0):
+    print("│  │")                                ## whitespace
+    if text is not "":                           ## if there is a title
+        print("│  │Choose a " + text)
+    for i in range(0,len(metaRef)):              ## for all of the options in the list
+        print("│", end="")                       ## print the number and |
         if i < 10:
             print("0", end="")
-        print(str(i) + " " + metaRef[i])
-    output = int(input(""))
+        print(str(i) + "│", end="")
+
+        if CTT is 1:
+            CodeToText(metaRef[i])
+        else:
+            print(metaRef[i])
+
+    output = int(input("│>>│"))
     return output
 
-def CodeToText(CodeIn, offset):
-    offset = offset*6
-    code = CodeIn[1+offset:4+offset]
-    ref = int(CodeIn[4+offset:6+offset])
-    if code == "Wep":
-        print(CodeIn[0+offset], end="*")                         ## ammount of the item (eg 2 handaxes)
-        print(MD.weaponList[ref][0], end="")
-    elif code == "WTy":
-        print(MD.weaponType[ref], end="")
-    elif code == "Arm":
-        print(MD.armourList[ref][0], end="")
-    elif code == "Pak":
-        print(MD.packList[ref] + " Pack", end="")
-    elif code == "Shd":
-        print("Shield", end="")
-    else:
-        print(MD.startEquip[startingClass][choices][items], end="")
+def CodeToText(CodeIn):
+    for i in range(0, int(len(CodeIn)/6)):
+        if i+1 == int(len(CodeIn)/6) and i != 0:
+            print(" and ", end="")
+        elif i > 0:
+            print(", ", end="")
+        offset = i*6
+        code = CodeIn[1+offset:4+offset]
+        ref = int(CodeIn[4+offset:6+offset])
+        if code == "Wep":
+            print(CodeIn[0+offset], end="*")                         ## ammount of the item (eg 2 handaxes)
+            print(MD.weaponList[ref][0])
+        elif code == "WTy":
+            print(MD.weaponType[ref], end="")
+        elif code == "Arm":
+            print(MD.armourList[ref][0], end="")
+        elif code == "Pak":
+            print(MD.packList[ref] + " Pack", end="")
+        elif code == "Shd":
+            print("Shield", end="")
+        else:
+            print(MD.startEquip[startingClass][choice], end="")
 
 def CodeAppend(CodeIn):
     for j in range(0,int(len(CodeIn)/6)):
@@ -47,10 +61,11 @@ def CodeAppend(CodeIn):
             if not added: ## if there isn't already a weapon of this type in your inventory
                 weapons.append([amount,ref]) ## add it
         if code == "Arm": ## don't get multiple armour so this flys :)
+            global armour
             armour = ref
         if code == "Shd":
+            global shield
             shield = 1
-
 
 def SaveAndQuit():
     ## classlevel
@@ -71,8 +86,10 @@ def SaveAndQuit():
     FH.writelines(str(armour) + "\n")
     FH.writelines(str(shield) + "\n")
 
-print("D&D 5e Character Sheet Tracker")
-name = input("Name a Character to Load:\n")
+print("┌──┐")
+print("│  │D&D 5e Character Sheet Tracker")
+print("│  │Character Name")
+name = input("│>>│")
 try:
     FH = open(name+".txt", "r")
     classLevel = json.loads(FH.readline())
@@ -87,7 +104,7 @@ try:
     FH.close()
 
 except FileNotFoundError:
-    print("That PC was not found,\nCreating New\n")
+    print("│  │That PC was not found,\n│  │Creating New")
 ## classlevel
     ## defining the empty arrays to put data into
     classLevel = [0]*len(MD.classList)
@@ -111,11 +128,10 @@ except FileNotFoundError:
 ## background
 ## alignment
     abilityScores = [0,0,0,0,0,0]
-    print("Ability Scores (H3/4d6)")
-    print(len(MD.statList))
+    print("│  │Ability Scores (H3/4d6)")
     for i in range(0,6):
-        abilityScores[i] = int(input(MD.statList[i] + ": "))
-    print(abilityScores)
+        print("│  │" + MD.statList[i] + ": ")
+        abilityScores[i] = int(input("│>>│"))
 
 ## ability scores (without any other bonuses)
 ## starting equipment (Class)
@@ -123,36 +139,17 @@ except FileNotFoundError:
     armour = 0
     shield = 0
 
-    for choices in range(0,len(MD.startEquip[startingClass])):                                  ## for each choice of equipment
-        if len(MD.startEquip[startingClass][choices]) != 1:                                     ## if there is actually a choice intead of the item being given to you
-            for items in range(0,len(MD.startEquip[startingClass][choices])):                       ## for every item that you can choose from list:
-                print(str(items) + " ", end="")                                                         ## index for selection
-                for groupedItems in range(0,int(len(MD.startEquip[startingClass][choices][items])/6)):     ## for multiple items in one choice (eg figher can take leather and bow in one option)
-                    CodeToText(MD.startEquip[startingClass][choices][items], groupedItems)                 ## and the actual text
-                    if groupedItems == (len(MD.startEquip[startingClass][choices][items])/6)-1:
-                        print("")
-                    else:
-                        print(" And ", end="")
-            chosenItem = int(input("Select an Item: "))                                             ## and ask for a selection after everthing is listed
-                                                                                            ## to be appeneded / inputted to the right place (TBA)
-        else:
-            print("you also get ", end="")
-            for i in range(0,int(len(MD.startEquip[startingClass][choices][0])/6)):
-                CodeToText(MD.startEquip[startingClass][choices][0],i)
-                if i == int(len(MD.startEquip[startingClass][choices][0])/6)-2:
-                    print(" and ", end="")
-                elif i < int(len(MD.startEquip[startingClass][choices][0])/6)-2:
-                    print(", ", end="")
-            print("") ## linebreak
-            chosenItem = 0
-            ## function to print all the things here
-            ## may be easier to combine all of the items that are free into one "choice"
-            ## eg pack rouge's leather and daggers together
-        CodeAppend(MD.startEquip[startingClass][choices][chosenItem]) ## add that equipment into the list
+    for choice in range(0, len(MD.startEquip[startingClass])):                  ## for every choice you get
+        if len(MD.startEquip[startingClass][choice]) != 1:                      ## if the item isn't just given to you
+            chosen = ListAndSelect("", MD.startEquip[startingClass][choice], 1) ## ask what choice they want
+
+        else:                                                                   ## if it is just given to you
+            chosen = 0                                                          ## add it automatically
+            print("you also get other things (THIS BIT TBA)")
+        CodeAppend(MD.startEquip[startingClass][choice][chosen])
 
 go = True
 while go: ## the main loop
-    print("------------------")
     menu = ListAndSelect("Menu Option", MD.menuList)
     if menu == 0:
         charSheetPrint(name, classLevel, subclass, startingClass, race, subrace, abilityScores, weapons, armour, shield)
@@ -161,3 +158,4 @@ while go: ## the main loop
         SaveAndQuit()
         FH.close()
         go = False
+print("└──┘")

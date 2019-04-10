@@ -35,7 +35,7 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
     prof = math.floor((charLevel-1)/4)+2
 
     ## full length is 121 -1 for the end =120 that divides nicely
-    print("┌───────────────────────────────────────┬───────────────────────────────────────┬───────────────────────────────────────┐")
+    print("├──┴────────────────────────────────────┬───────────────────────────────────────┬───────────────────────────────────────┐")
 
     classText = ""
     for i in range(0,len(MD.classList)):
@@ -112,7 +112,7 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
         ## the actuall process of adding the bonus
         intAC += dexACBonus
         stringAC = stringAC + " "
-        if dexACBonus > 0:
+        if dexACBonus > -1:
             stringAC = stringAC + "+"
         stringAC = stringAC + str(dexACBonus) + " Dex"
 
@@ -139,7 +139,8 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
     ## weapons
     printSpace("Weapons", 120)
     print("│")
+    for i in range(0,len(weapons)):
+        printSpace(str(weapons[i]) + MD.weaponList[i][0], 120)
+        print("│")
 
-
-
-    ## print("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")
+    print("├──┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")
