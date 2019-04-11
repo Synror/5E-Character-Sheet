@@ -32,8 +32,9 @@ def CodeToText(CodeIn):
         offset = i*6
         code = CodeIn[1+offset:4+offset]
         ref = int(CodeIn[4+offset:6+offset])
+        if int(CodeIn[0+offset]) > 1:
+            print(CodeIn[0+offset], end="*")
         if code == "Wep":
-            print(CodeIn[0+offset], end="*")                         ## ammount of the item (eg 2 handaxes)
             print(MD.weaponList[ref][0], end="")
         elif code == "WTy":
             print(MD.weaponType[ref], end="")
