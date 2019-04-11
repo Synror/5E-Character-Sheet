@@ -34,7 +34,7 @@ def CodeToText(CodeIn):
         ref = int(CodeIn[4+offset:6+offset])
         if code == "Wep":
             print(CodeIn[0+offset], end="*")                         ## ammount of the item (eg 2 handaxes)
-            print(MD.weaponList[ref][0])
+            print(MD.weaponList[ref][0], end="")
         elif code == "WTy":
             print(MD.weaponType[ref], end="")
         elif code == "Arm":
@@ -45,7 +45,7 @@ def CodeToText(CodeIn):
             print("Shield", end="")
         else:
             print(MD.startEquip[startingClass][choice], end="")
-
+    print("")
 def CodeAppend(CodeIn):
     for j in range(0,int(len(CodeIn)/6)):
         offset = j*6
