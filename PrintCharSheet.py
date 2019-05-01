@@ -140,7 +140,8 @@ def charSheetPrint(name, classLevel, subClass, startingClass, race, subrace, abi
     printSpace("Weapons", 120)
     print("│")
     for i in range(0,len(weapons)):
-        printSpace(str(weapons[i]) + MD.weaponList[i][0], 120)
+        printSpace(str(MD.weaponList[i][1]) + " " + MD.weaponList[i][0], 20)
+        printSpace(MD.weaponList[i][3] + " " + MD.weaponList[i][4], 100, ":")
         print("│")
 
     print("├──┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")
