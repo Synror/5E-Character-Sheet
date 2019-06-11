@@ -47,7 +47,7 @@ def CodeToText(CodeIn):
         else:
             print(MD.startEquip[startingClass][choice], end="")
     print("")
-    
+
 def CodeAppend(CodeIn):
     for j in range(0,int(len(CodeIn)/6)):
         offset = j*6
