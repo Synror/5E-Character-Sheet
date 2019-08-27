@@ -29,14 +29,15 @@ classFeatures = [[["Rage","Unarmoured Defence"],["Reekless Attack","Danger Sense
                  [["Otherworldly Patron", "Pact Magic"],["Eldritch Evocations"],["Pact Boon"],["ASI"],[""],["Patron Feature: "],[""],["ASI"],[""],["Patron Feature: "],["Mystic Arcanum (6th)"],["ASI"],["Mystic Arcanum (7th)"],["Patron Feature: "],["Mystic Arcanum (8th)"],["ASI"],["Mystic Arcanum (9th)"],[""],["ASI"],["Eldritch Master"]],
                  [["Spellcasting","Arcane Recovery"],["Arcane Tradition"],[""],["ASI"],[""],["Tradition Feature: "],[""],["ASI"],[""],["Tradition Feature: "],[""],["ASI"],[""],["Tradition Feature: "],[""],["ASI"],[""],["Spell Mastery"],["ASI"],["Signature Spell"]]]
 
-for printclassname in range(0,len(classList)):
-    for printlevel in range(0,20):
-        for printfeature in range(0, len(classFeatures[printclassname][printlevel])):
-            if classFeatures[printclassname][printlevel][0] is not "":
-                if printlevel<9: #this number may need changing if reimplemented
-                    print(0, end="")
-                print(str(printlevel + 1) + " " + classList[printclassname][:4] + " " + classFeatures[printclassname][printlevel][printfeature])
-    print("----------------")
+#for printclassname in range(0,len(classList)):
+#    for printlevel in range(0,20):
+#        for printfeature in range(0, len(classFeatures[printclassname][printlevel])):
+#            if classFeatures[printclassname][printlevel][0] is not "":
+#                if printlevel<9: #this number may need changing if reimplemented
+#                    print(0, end="")
+#                print(str(printlevel + 1) + " " + classList[printclassname][:4] + " " + classFeatures[printclassname][printlevel][printfeature])
+#    print("----------------")
+
 #did a thing here to make the array for me
 #print("[", end="")
 #for i in range(0,len(classList)):
