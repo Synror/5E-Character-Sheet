@@ -1,56 +1,43 @@
-## imports!
-import Define as info
-import Deekek as char
-import math
+## ┌───────────────────────────────────────────────────────────┬──────┬────────────────────────────────────────────────────┐
+## │[Name], A [alignment] [race] [levelClass]                  │Traits│                                                    │
+## ├─────────┬─────────┬─────────┬─────────┬─────────┬─────────┤Ideals│                                                    │
+## │STR 10 +0│DEX 10 +0│CON 10 +0│INT 10 +0│WIS 10 +0│CHA 10 +0│Flaws │                                                    │
+## │ (ST +2) │         │ (ST +2) │         │         │         │Bonds │                                                    │
+## ├─────────┴─────────┼─────────┴─────────┼─────────┴─────────┼──────┴────────────────────────────────────────────────────┤
+## │+0 Acrobatics      │+0 Insight         │+0 Performance     │Background: [background]                                   │
+## │+0 Animal Handling │+0 Intimidation    │+0 Persuasion      │AC: [AC] = [ACExplaination]                                │
+## │+0 Arcarna         │+0 Investigation   │+0 Religion        │Held Weapon : [wieldType][weapon]                          │
+## │+0 Athletics       │+0 Medicine        │+0 Slight of Hand  │Max HP: [HP]                                               │
+## │+0 Deception       │+0 Nature          │+0 Stealth         │Speed: [SPD]ft                                             │
+## │+0 History         │+0 Perception      │+0 Survival        │Hit Dice: [hitDice]                                        │
+## ├───────────────────┴───────────────────┴───────────────────┴───────────────────────────────────────────────────────────┤
+## │Proficiencies                                                                                                          │
+## │    [class]                                                                                                            │
+## │[classProf]                                                                                                            │
+## │    [background]                                                                                                       │
+## │[backgroundProf]                                                                                                       │
+## │                                                                                                                       │
+## │FEATURES                                                                                                               │
+## │[class & feats text]                                                                                                   │
+## └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+## this is the look that i'm going for
 
-## defing my own things
-def printScore(line):
-    print(info.abilities[line][:3], end = "")
-    print(" ", end = "")
-    if char.abilityScores[line] < 10:
-        print("0", end = "")
-    print(char.abilityScores[line], end = "")
-    print(" ", end = "")
-    if ((char.abilityScores[line]-10)/2) > -1:
-        print("+", end = "")
-    print(math.floor((char.abilityScores[line]-10)/2), end = "")
-    print("  │", end = "")
+def printlen(string, length):
+    if len(string) > length:
+        print(string[:length])
+    else:
+        print(string, end = "")
+        for i in range(0,length-len(string)):
+            print(" ", end="")
 
+print("┌───────────────────────────────────────────────────────────┬──────┬────────────────────────────────────────────────────┐")
 
-def printSkills(line):
-    for col in range(0,3):
-        skillbonus = math.floor((char.abilityScores[info.skills[line + col][1]]-10)/2) + (char.skillProf[line + col] * 2)
-        if skillbonus > -1:
-            print("+", end = "")
-        print(str(skillbonus) + " ", end = "")
-        print(info.skills[line + col][0], end = "│")
-    print("")
-
-## and the main stuff starts here
-
-print("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐")
-firstline = char.name
-
-if char.alignment[:1] is "E":
-    firstline += ", An "
-else:
-    firstline += ", A "
-
-firstline += char.alignment + " " + char.race + " " + char.levelClass
-
-
-
-## whitespace after the first line
-print("│" + firstline, end ="")
-space = 119 - len(firstline)
-for i in range(0,space):
-    print(" ", end = "")
+print("│", end = "")
+printlen("[Name]" + ", A " + "[alignment]" + " " "[race]" + " " + "[levelClass]", 59   )
+print("│Traits│", end="")
+printlen("", 52) ## this is where the traits text will go
 print("│")
 
-
-
-print("├───────────┬───────────────┬───────────────┬───────────────┐                                                           │")
-for i in range(0,6):
-    print("│", end = "")
-    printScore(i)
-    printSkills(i*3)
+print("├─────────┬─────────┬─────────┬─────────┬─────────┬─────────┤Ideals│", end = "")
+printlen("", 52) ## this is where the ideals text will go
+print("│")

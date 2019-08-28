@@ -1,6 +1,6 @@
-## │║─═
-## ┌┬┐╒╤╕╓╥╖╔╦╗
-## ├┼┤╞╪╡╟╫╢╠╬╣
+## ││──
+## ┌┬┐╒╤╕╓╥╖┌╦╗
+## ├┼┤╞╪╡├╫┤╠╬╣
 ## └┴┘╙╨╜╘╧╛╚╩╝
 ## hear me out on this one, i'm gonna make a sperate file for printing the character sheet itself and its gonna be this long ;)
 import math
