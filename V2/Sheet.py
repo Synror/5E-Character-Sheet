@@ -1,9 +1,11 @@
-## ┌───────────────────────────────────────────────────────────┬──────┬────────────────────────────────────────────────────┐
-## │[Name], A [alignment] [race] [levelClass]                  │Traits│                                                    │
-## ├─────────┬─────────┬─────────┬─────────┬─────────┬─────────┤Ideals│                                                    │
-## │STR 10 +0│DEX 10 +0│CON 10 +0│INT 10 +0│WIS 10 +0│CHA 10 +0│Flaws │                                                    │
-## │ (ST +2) │         │ (ST +2) │         │         │         │Bonds │                                                    │
-## ├─────────┴─────────┼─────────┴─────────┼─────────┴─────────┼──────┴────────────────────────────────────────────────────┤
+## ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+## │[Name], A [alignment] [race] [levelClass]                                                                              │
+## ├─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬──────┬────────────────────────────────────────────────────┤
+## │ STR: 10 │ Dex: 10 │ Con: 10 │ Int: 10 │ Wis: 10 │ Int: 10 │Traits│                                                    │
+## ├─────────┴─────────┼─────────┴─────────┼─────────┴─────────┤Ideals│                                                    │
+## │+0 Strength ST     │+0 Dexterity ST    │+0 Constitution ST │Flaws │                                                    │
+## │+0 Intelligence ST │+0 Wizdom ST       │+0 Charisma ST     │Bonds │                                                    │
+## ├───────────────────┼───────────────────┼───────────────────┼──────┴────────────────────────────────────────────────────┤
 ## │+0 Acrobatics      │+0 Insight         │+0 Performance     │Background: [background]                                   │
 ## │+0 Animal Handling │+0 Intimidation    │+0 Persuasion      │AC: [AC] = [ACExplaination]                                │
 ## │+0 Arcarna         │+0 Investigation   │+0 Religion        │Held Weapon : [wieldType][weapon]                          │
@@ -27,6 +29,8 @@ import metaDefine as info
 import math
 
 # Defining my own things yay
+
+## this function is for printing with whitespace
 def printlen(string, length):
     if len(string) > length:
         print(string[:length], end = "")
@@ -35,7 +39,7 @@ def printlen(string, length):
         for i in range(0,length-len(string)):
             print(" ", end="")
 
-## levelJob (calling the dnd classes JOBS to distinguish them from programming classes)
+## levelJob is for figuring out what level and class your character is for the first line
 def calcLevelJob():
     out = ""
     for jobindex in range(0,len(info.jobs)):
@@ -53,28 +57,37 @@ def calcAbilityScore(integer):
     return out
 
 ## this calculates the ability modifier based of of the score that is put into it
-def calcAbilityModifier(score):
+def calcAbilityModifier(score, profbonusmod):
     modifier = math.floor((score-10)/2)
-    return addPositivePlus(modifier)
-
-## this adds a "+" infront of an int if it is positive (or = 0)
-def addPositivePlus(int):
+    ## this adds a "+" infront of an int if it is positive (or = 0)
+    modifier += profbonusmod ## times the actual prof bonus?
     out = ""
-    if int >= 0:
+    if modifier >= 0:
         out += "+"
-    out += str(int)
+    out += str(modifier)
+    ## and return!
     return out
 
-def printSkills(start, stop):
-    for i in range(start, stop):
-        ## get the base score from ability
-        ## add bonus from skill proficiencies
-        ## add a "+" for positive
-        ## print modifier
-        print("+X", end = " ")
-        ## print name of mod
-        printlen(info.skillList[i][0], 16)
-        print("│", end = "")
+## i wraped this into a function because it makes it easy for me to call it later on
+
+
+def printSkills(baseScore, profbonusmod, text):
+    printlen(calcAbilityModifier(baseScore, profbonusmod) + " " + text, 19)
+    print("│", end = "")
+
+def printMiscInfo(index):
+    if index == 0:
+        printlen("Backgroud: ", 59)
+    elif index == 1:
+        printlen("AC: ", 59)
+    elif index == 2:
+        printlen("Held Weapon: ", 59)
+    elif index == 3:
+        printlen("Max HP: ", 59)
+    elif index == 4:
+        printlen("Speed: ", 59)
+    elif index == 5:
+        printlen("Hit Dice: ", 59)
 
 ## at some point there is gonna be some file handling or something here
 name = "Deekek"
@@ -84,53 +97,70 @@ abilityScores = [6,13,14,13,12,16]
 levelJob = [0]*12
 startingJob = 9
 levelJob[startingJob] = 7 # level 7
+skillProf = [0]*18
 
+## flavortext (keep it short or it'll just not write the first however many characters)
 traits = "I am well known as a merchent around Eutharia"
 ideals = "To have Eutaria see peace"
 flaws  = "I am simple minded and prone to forgetting"
 bonds  = "My Friends, Wife and Magic Hat"
 
-## and the fun begins (each new line has a space between)
 
-print("┌───────────────────────────────────────────────────────────┬──────┬────────────────────────────────────────────────────┐")
+## and the fun begins (each new line has a space between) but this is where all of the prints go
+
+print("┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐")
+
 
 print("│", end = "")
-printlen(name + ", A " + alignment + " " + race + " " + calcLevelJob(), 59)
-print("│Traits│", end="")
+printlen(name + ", A " + alignment + " " + race + " " + calcLevelJob(), 119)
+print("│")
+
+
+print("├─────────┬─────────┬─────────┬─────────┬─────────┬─────────┬──────┬────────────────────────────────────────────────────┤")
+
+
+print("│", end = "")
+for i in range(0,6):
+    print(" " + info.abilities[i][:3] + ": " + calcAbilityScore(abilityScores[i]) + " │", end = "")
+print("Traits│", end="")
 printlen(traits, 52)
 print("│")
 
-print("├─────────┬─────────┬─────────┬─────────┬─────────┬─────────┤Ideals│", end = "")
+
+print("├─────────┴─────────┼─────────┴─────────┼─────────┴─────────┤Ideals│", end = "")
 printlen(ideals, 52)
 print("│")
 
-print("│", end = "")
-for i in range(0,6):
-    print(info.abilities[i][:3] + " " + calcAbilityScore(abilityScores[i]) + " " + calcAbilityModifier(abilityScores[i]), end = "│")
-print("Flaws │", end = "")
-printlen(flaws, 52) ## this is where the flaws text will go
-print("│")
 
 print("│", end = "")
-for i in range(0,6):
-    if info.savingThrowList[startingJob][i]:
-        print(" (ST +2) │", end = "")
-    else:
-        print("         │", end = "")
+for i in range(0,3):
+    printSkills(abilityScores[i], info.savingThrowList[startingJob][i], info.abilities[i] + " ST")
 print("Bonds │", end = "")
-printlen(bonds, 52) ## this is where the flaws text will go
+printlen(bonds, 52)
 print("│")
 
-print("├─────────┴─────────┼─────────┴─────────┼─────────┴─────────┼──────┴────────────────────────────────────────────────────┤")
+
+print("│", end = "")
+for i in range(3,6):
+    printSkills(abilityScores[i], info.savingThrowList[startingJob][i], info.abilities[i] + " ST")
+print("Flaws │", end = "")
+printlen(flaws, 52)
+print("│")
+
+
+print("├───────────────────┼───────────────────┼───────────────────┼──────┴────────────────────────────────────────────────────┤")
+
 
 for i in range(0,6):
     print("│", end = "")
-    printSkills(i*3,(i+1)*3)
-    printlen("", 59)
+    for j in range(0,3):
+        printSkills(abilityScores[info.skillList[(3*i)+j][1]], skillProf[(3*i)+j], info.skillList[(3*i)+j][0])
+    printMiscInfo(i)
     print("│")
+
 
 print("├───────────────────┴───────────────────┴───────────────────┴───────────────────────────────────────────────────────────┤")
 
-## featuers or something
+print("│Features need to go here (or something like that)                                                                      │")
 
 print("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")

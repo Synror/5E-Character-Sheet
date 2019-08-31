@@ -2,20 +2,20 @@ abilities = ["Strength","Dexterity","Constitution","Inteligence","Wizdom","Chari
 
 jobs = ["Barb", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rouge", "Sorcerer", "Warlock", "Wizard"]
 
-savingThrowList = [[True, False, True, False, False, False],
-                   [False, True, False, False, False, True],
-                   [False, False, False, False, True, True],
-                   [False, False, False, True, True, False],
-                   [True, False, True, False, False, False],
-                   [True, True, False, False, False, False],
-                   [False, False, False, False, True, True],
-                   [True, True, False, False, False, False],
-                   [False, True, False, True, False, False],
-                   [False, False, True, False, False, True],
-                   [False, False, False, False, True, True],
-                   [False, False, False, True, True, False]]
+savingThrowList = [[1, 0, 1, 0, 0, 0],
+                   [0, 1, 0, 0, 0, 1],
+                   [0, 0, 0, 0, 1, 1],
+                   [0, 0, 0, 1, 1, 0],
+                   [1, 0, 1, 0, 0, 0],
+                   [1, 1, 0, 0, 0, 0],
+                   [0, 0, 0, 0, 1, 1],
+                   [1, 1, 0, 0, 0, 0],
+                   [0, 1, 0, 1, 0, 0],
+                   [0, 0, 1, 0, 0, 1],
+                   [0, 0, 0, 0, 1, 1],
+                   [0, 0, 0, 1, 1, 0]]
 
-skillList = [["Acrobatics",0],
+skillList = [["Acrobatics",1],
               ["Animal Handling",4],
               ["Arcana",3],
               ["Athletics",0],
