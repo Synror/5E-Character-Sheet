@@ -29,14 +29,14 @@ import math
 # Defining my own things yay
 def printlen(string, length):
     if len(string) > length:
-        print(string[:length])
+        print(string[:length], end = "")
     else:
         print(string, end = "")
         for i in range(0,length-len(string)):
             print(" ", end="")
 
 ## levelJob (calling the dnd classes JOBS to distinguish them from programming classes)
-def printLevelJob():
+def calcLevelJob():
     out = ""
     for jobindex in range(0,len(info.jobs)):
         if levelJob[jobindex] > 0:
@@ -45,7 +45,7 @@ def printLevelJob():
 
 
 ## this adds a 0 infront of any ability scores less than 10, so 9 becomes "09" and the width is standard
-def printAbilityScore(integer):
+def calcAbilityScore(integer):
     out = ""
     if integer < 10:
         out += "0"
@@ -53,14 +53,28 @@ def printAbilityScore(integer):
     return out
 
 ## this calculates the ability modifier based of of the score that is put into it
-def printAbilityModifier(score):
+def calcAbilityModifier(score):
     modifier = math.floor((score-10)/2)
+    return addPositivePlus(modifier)
+
+## this adds a "+" infront of an int if it is positive (or = 0)
+def addPositivePlus(int):
     out = ""
-    if modifier > -1:
+    if int >= 0:
         out += "+"
-    out += str(modifier)
+    out += str(int)
     return out
 
+def printSkills(start, stop):
+    for i in range(start, stop):
+        ## get the base score from ability
+        ## add bonus from skill proficiencies
+        ## add a "+" for positive
+        ## print modifier
+        print("+X", end = " ")
+        ## print name of mod
+        printlen(info.skillList[i][0], 16)
+        print("│", end = "")
 
 ## at some point there is gonna be some file handling or something here
 name = "Deekek"
@@ -68,25 +82,55 @@ alignment = "NG"
 race = "Aarakocra"
 abilityScores = [6,13,14,13,12,16]
 levelJob = [0]*12
-levelJob[9] = 7
+startingJob = 9
+levelJob[startingJob] = 7 # level 7
+
+traits = "I am well known as a merchent around Eutharia"
+ideals = "To have Eutaria see peace"
+flaws  = "I am simple minded and prone to forgetting"
+bonds  = "My Friends, Wife and Magic Hat"
 
 ## and the fun begins (each new line has a space between)
 
 print("┌───────────────────────────────────────────────────────────┬──────┬────────────────────────────────────────────────────┐")
 
 print("│", end = "")
-printlen(name + ", A " + alignment + " " + race + " " + printLevelJob(), 59)
+printlen(name + ", A " + alignment + " " + race + " " + calcLevelJob(), 59)
 print("│Traits│", end="")
-printlen("", 52) ## this is where the traits text will go
+printlen(traits, 52)
 print("│")
 
 print("├─────────┬─────────┬─────────┬─────────┬─────────┬─────────┤Ideals│", end = "")
-printlen("", 52) ## this is where the ideals text will go
+printlen(ideals, 52)
 print("│")
 
 print("│", end = "")
 for i in range(0,6):
-    print(info.abilities[i][:3] + " " + printAbilityScore(abilityScores[i]) + " " + printAbilityModifier(abilityScores[i]), end = "│")
+    print(info.abilities[i][:3] + " " + calcAbilityScore(abilityScores[i]) + " " + calcAbilityModifier(abilityScores[i]), end = "│")
 print("Flaws │", end = "")
-printlen("", 52) ## this is where the flaws text will go
+printlen(flaws, 52) ## this is where the flaws text will go
 print("│")
+
+print("│", end = "")
+for i in range(0,6):
+    if info.savingThrowList[startingJob][i]:
+        print(" (ST +2) │", end = "")
+    else:
+        print("         │", end = "")
+print("Bonds │", end = "")
+printlen(bonds, 52) ## this is where the flaws text will go
+print("│")
+
+print("├─────────┴─────────┼─────────┴─────────┼─────────┴─────────┼──────┴────────────────────────────────────────────────────┤")
+
+for i in range(0,6):
+    print("│", end = "")
+    printSkills(i*3,(i+1)*3)
+    printlen("", 59)
+    print("│")
+
+print("├───────────────────┴───────────────────┴───────────────────┴───────────────────────────────────────────────────────────┤")
+
+## featuers or something
+
+print("└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘")
