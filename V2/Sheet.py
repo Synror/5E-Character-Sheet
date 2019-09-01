@@ -14,15 +14,22 @@
 ## │+0 History         │+0 Perception      │+0 Survival        │Hit Dice: [hitDice]                                        │
 ## ├───────────────────┴───────────────────┴───────────────────┴───────────────────────────────────────────────────────────┤
 ## │Proficiencies                                                                                                          │
-## │    [class]                                                                                                            │
-## │[classProf]                                                                                                            │
+## │    Sorcerer                                                                                                           │
+## │Darts, Daggers Slings ect                                                                                              │
 ## │    [background]                                                                                                       │
 ## │[backgroundProf]                                                                                                       │
 ## │                                                                                                                       │
-## │FEATURES                                                                                                               │
-## │[class & feats text]                                                                                                   │
+## │Features                                                                                                               │
+## │    Sorcerer                                                                                                           │
+## │1st: Sorcerous origin, spellcasting ect                                                                                │
 ## └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ## this is the look that i'm going for
+
+## __TODOD__
+## print the Proficiencies and Features
+## info calculations in printMiscInfo()
+## File handling for use with multiple characters
+## ability to make new characters
 
 ## imports yay
 import metaDefine as info
@@ -60,7 +67,7 @@ def calcAbilityScore(integer):
 def calcAbilityModifier(score, profbonusmod):
     modifier = math.floor((score-10)/2)
     ## this adds a "+" infront of an int if it is positive (or = 0)
-    modifier += profbonusmod ## times the actual prof bonus?
+    modifier += profbonusmod * profBonus ## times the actual prof bonus, this way if expertise is doing something we can pass in 2 for the mod instead of 1
     out = ""
     if modifier >= 0:
         out += "+"
