@@ -14,15 +14,19 @@
 ## │+0 History         │+0 Perception      │+0 Survival        │Hit Dice: [hitDice]                                        │
 ## ├───────────────────┴───────────────────┴───────────────────┴───────────────────────────────────────────────────────────┤
 ## │Proficiencies                                                                                                          │
-## │    [class]                                                                                                            │
-## │[classProf]                                                                                                            │
+## │    Sorcerer                                                                                                           │
+## │Darts, Daggers Slings ect                                                                                              │
 ## │    [background]                                                                                                       │
 ## │[backgroundProf]                                                                                                       │
 ## │                                                                                                                       │
 ## │FEATURES                                                                                                               │
-## │[class & feats text]                                                                                                   │
+## │    Sorcerer                                                                                                           │
+## │1st: Sorcerous origin, spellcasting ect                                                                                │
 ## └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ## this is the look that i'm going for
+
+## __TODOD__
+## 
 
 ## imports yay
 import metaDefine as info
