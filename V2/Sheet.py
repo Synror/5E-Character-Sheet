@@ -19,17 +19,25 @@
 ## │    [background]                                                                                                       │
 ## │[backgroundProf]                                                                                                       │
 ## │                                                                                                                       │
+<<<<<<< HEAD
 ## │Features                                                                                                               │
+=======
+## │FEATURES                                                                                                               │
+>>>>>>> fb9a926de9f0c9c80227c01fefe3986076d7a0af
 ## │    Sorcerer                                                                                                           │
 ## │1st: Sorcerous origin, spellcasting ect                                                                                │
 ## └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ## this is the look that i'm going for
 
 ## __TODOD__
+<<<<<<< HEAD
 ## print the Proficiencies and Features
 ## info calculations in printMiscInfo()
 ## File handling for use with multiple characters
 ## ability to make new characters
+=======
+## 
+>>>>>>> fb9a926de9f0c9c80227c01fefe3986076d7a0af
 
 ## imports yay
 import metaDefine as info
