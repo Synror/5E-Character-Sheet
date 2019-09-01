@@ -19,25 +19,17 @@
 ## │    [background]                                                                                                       │
 ## │[backgroundProf]                                                                                                       │
 ## │                                                                                                                       │
-<<<<<<< HEAD
 ## │Features                                                                                                               │
-=======
-## │FEATURES                                                                                                               │
->>>>>>> fb9a926de9f0c9c80227c01fefe3986076d7a0af
 ## │    Sorcerer                                                                                                           │
 ## │1st: Sorcerous origin, spellcasting ect                                                                                │
 ## └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ## this is the look that i'm going for
 
 ## __TODOD__
-<<<<<<< HEAD
 ## print the Proficiencies and Features
 ## info calculations in printMiscInfo()
 ## File handling for use with multiple characters
 ## ability to make new characters
-=======
-## 
->>>>>>> fb9a926de9f0c9c80227c01fefe3986076d7a0af
 
 ## imports yay
 import metaDefine as info
@@ -119,6 +111,12 @@ traits = "I am well known as a merchent around Eutharia"
 ideals = "To have Eutaria see peace"
 flaws  = "I am simple minded and prone to forgetting"
 bonds  = "My Friends, Wife and Magic Hat"
+
+## Prof bonus, AC ect are compleatly calculatable
+characterLevel = 0
+for i in range(0,len(levelJob)):
+    characterLevel += levelJob[i]
+profBonus = 2 + math.floor((characterLevel-1)/4)
 
 
 ## and the fun begins (each new line has a space between) but this is where all of the prints go
