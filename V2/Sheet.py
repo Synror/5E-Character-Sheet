@@ -105,9 +105,11 @@ levelJob = [0]*12
 startingJob = 9
 levelJob[startingJob] = 7 # level 7
 skillProf = [0]*18
+## background = int corrisponding with whatever background
+## heldWeapon = int corrisponding with the weapon list
 
 ## flavortext (keep it short or it'll just not write the first however many characters)
-traits = "I am well known as a merchent around Eutharia"
+traits = "I am well known as a merchant around Eutharia"
 ideals = "To have Eutaria see peace"
 flaws  = "I am simple minded and prone to forgetting"
 bonds  = "My Friends, Wife and Magic Hat"
@@ -118,6 +120,15 @@ for i in range(0,len(levelJob)):
     characterLevel += levelJob[i]
 profBonus = 2 + math.floor((characterLevel-1)/4)
 
+AC = 12 ## calculation needs to go here but this'll do for now
+ACExp = "10 Unarmoured + 2 Dexterity" ## this will prolly be it's own function tbh
+WeaponChoiceStr = "Quarterstaff" ## calc from new variable to be stored
+maxHP = 48 ## calc from hp rolls and CON
+speed = 25 ## calc from race
+hitDice = "7d6" + " /LR"  ## calc from how many levels in a class (per long rest as they regen)
+backgroundStr = "Merchant"
+
+miscInfo = ["Max HP: " + str(maxHP), "AC: " + str(AC) + " = " + ACExp, "Held Weapon: " + WeaponChoiceStr, "Speed: " + str(speed), "Hit Dice: " + hitDice, "Backgroud: " + backgroundStr]
 
 ## and the fun begins (each new line has a space between) but this is where all of the prints go
 
@@ -168,7 +179,7 @@ for i in range(0,6):
     print("│", end = "")
     for j in range(0,3):
         printSkills(abilityScores[info.skillList[(3*i)+j][1]], skillProf[(3*i)+j], info.skillList[(3*i)+j][0])
-    printMiscInfo(i)
+    printlen(miscInfo[i], 59)
     print("│")
 
 
