@@ -49,9 +49,8 @@ def printlen(string, length):
 ## levelJob is for figuring out what level and class your character is for the first line
 def calcLevelJob():
     out = ""
-    for jobindex in range(0,len(info.jobs)):
-        if levelJob[jobindex] > 0:
-            out += str(levelJob[jobindex]) + "/" + info.jobs[jobindex] + " "
+    for i in range(0,len(job)):
+        out += str(level[i]) + "/" + info.jobs[job[i]] + " "
     return out[:-1]
 
 
@@ -82,28 +81,13 @@ def printSkills(baseScore, profbonusmod, text):
     printlen(calcAbilityModifier(baseScore, profbonusmod) + " " + text, 19)
     print("│", end = "")
 
-def printMiscInfo(index):
-    if index == 0:
-        printlen("Backgroud: ", 59)
-    elif index == 1:
-        printlen("AC: ", 59)
-    elif index == 2:
-        printlen("Held Weapon: ", 59)
-    elif index == 3:
-        printlen("Max HP: ", 59)
-    elif index == 4:
-        printlen("Speed: ", 59)
-    elif index == 5:
-        printlen("Hit Dice: ", 59)
-
 ## at some point there is gonna be some file handling or something here
 name = "Deekek"
 alignment = "NG"
 race = "Aarakocra"
 abilityScores = [6,13,14,13,12,16]
-levelJob = [0]*12
-startingJob = 9
-levelJob[startingJob] = 7 # level 7
+job = [9]
+level = [7]
 skillProf = [0]*18
 ## background = int corrisponding with whatever background
 ## heldWeapon = int corrisponding with the weapon list
@@ -116,8 +100,8 @@ bonds  = "My Friends, Wife and Magic Hat"
 
 ## Prof bonus, AC ect are compleatly calculatable
 characterLevel = 0
-for i in range(0,len(levelJob)):
-    characterLevel += levelJob[i]
+for i in range(0,len(level)):
+    characterLevel += level[i]
 profBonus = 2 + math.floor((characterLevel-1)/4)
 
 AC = 12 ## calculation needs to go here but this'll do for now
@@ -158,7 +142,7 @@ print("│")
 
 print("│", end = "")
 for i in range(0,3):
-    printSkills(abilityScores[i], info.savingThrowList[startingJob][i], info.abilities[i] + " ST")
+    printSkills(abilityScores[i], info.savingThrowList[job[0]][i], info.abilities[i] + " ST")
 print("Bonds │", end = "")
 printlen(bonds, 52)
 print("│")
@@ -166,7 +150,7 @@ print("│")
 
 print("│", end = "")
 for i in range(3,6):
-    printSkills(abilityScores[i], info.savingThrowList[startingJob][i], info.abilities[i] + " ST")
+    printSkills(abilityScores[i], info.savingThrowList[job[0]][i], info.abilities[i] + " ST")
 print("Flaws │", end = "")
 printlen(flaws, 52)
 print("│")
