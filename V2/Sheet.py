@@ -63,10 +63,10 @@ def calcAbilityScore(integer):
     return out
 
 ## this calculates the ability modifier based of of the score that is put into it
-def calcAbilityModifier(score, profbonusmod):
+def calcAbilityModifier(score, profExpert):
     modifier = math.floor((score-10)/2)
     ## this adds a "+" infront of an int if it is positive (or = 0)
-    modifier += profbonusmod * profBonus ## times the actual prof bonus, this way if expertise is doing something we can pass in 2 for the mod instead of 1
+    modifier += profExpert * profBonus ## times the actual prof bonus, this way if expertise is doing something we can pass in 2 for the mod instead of 1
     out = ""
     if modifier >= 0:
         out += "+"
@@ -77,8 +77,8 @@ def calcAbilityModifier(score, profbonusmod):
 ## i wraped this into a function because it makes it easy for me to call it later on
 
 
-def printSkills(baseScore, profbonusmod, text):
-    printlen(calcAbilityModifier(baseScore, profbonusmod) + " " + text, 19)
+def printSkills(baseScore, profExpert, text):
+    printlen(calcAbilityModifier(baseScore, profExpert) + " " + text, 19)
     print("│", end = "")
 
 ## at some point there is gonna be some file handling or something here
@@ -88,7 +88,12 @@ race = "Aarakocra"
 abilityScores = [6,13,14,13,12,16]
 job = [9]
 level = [7]
-skillProf = [0]*18
+skillProf = [[0]*6,[0]*18]
+skillProf[0][2] = 1 ## base these off of info.savingThrowList[job[0]][i]
+skillProf[0][5] = 1
+skillProf[1][3] = 1 ## now all i need to do is remember what skills Deekek has
+print(skillProf)
+## Equipment (Armour & Weapons) (probably gonna be 2 different variables)
 ## background = int corrisponding with whatever background
 ## heldWeapon = int corrisponding with the weapon list
 
@@ -108,7 +113,7 @@ AC = 12 ## calculation needs to go here but this'll do for now
 ACExp = "10 Unarmoured + 2 Dexterity" ## this will prolly be it's own function tbh
 WeaponChoiceStr = "Quarterstaff" ## calc from new variable to be stored
 maxHP = 48 ## calc from hp rolls and CON
-speed = 25 ## calc from race
+speed = [25, 50] ## calc from race 2nd in array for flight speed
 hitDice = "7d6" + " /LR"  ## calc from how many levels in a class (per long rest as they regen)
 backgroundStr = "Merchant"
 
@@ -142,7 +147,7 @@ print("│")
 
 print("│", end = "")
 for i in range(0,3):
-    printSkills(abilityScores[i], info.savingThrowList[job[0]][i], info.abilities[i] + " ST")
+    printSkills(abilityScores[i], skillProf[0][i], info.abilities[i] + " ST")
 print("Bonds │", end = "")
 printlen(bonds, 52)
 print("│")
@@ -150,7 +155,7 @@ print("│")
 
 print("│", end = "")
 for i in range(3,6):
-    printSkills(abilityScores[i], info.savingThrowList[job[0]][i], info.abilities[i] + " ST")
+    printSkills(abilityScores[i], skillProf[0][i], info.abilities[i] + " ST")
 print("Flaws │", end = "")
 printlen(flaws, 52)
 print("│")
@@ -162,7 +167,7 @@ print("├───────────────────┼───�
 for i in range(0,6):
     print("│", end = "")
     for j in range(0,3):
-        printSkills(abilityScores[info.skillList[(3*i)+j][1]], skillProf[(3*i)+j], info.skillList[(3*i)+j][0])
+        printSkills(abilityScores[info.skillList[(3*i)+j][1]], skillProf[1][(3*i)+j], info.skillList[(3*i)+j][0])
     printlen(miscInfo[i], 59)
     print("│")
 
