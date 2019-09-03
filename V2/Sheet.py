@@ -92,7 +92,7 @@ skillProf = [[0]*6,[0]*18]
 skillProf[0][2] = 1 ## base these off of info.savingThrowList[job[0]][i]
 skillProf[0][5] = 1
 skillProf[1][3] = 1 ## now all i need to do is remember what skills Deekek has
-print(skillProf)
+
 ## Equipment (Armour & Weapons) (probably gonna be 2 different variables)
 ## background = int corrisponding with whatever background
 ## heldWeapon = int corrisponding with the weapon list
@@ -109,7 +109,8 @@ for i in range(0,len(level)):
     characterLevel += level[i]
 profBonus = 2 + math.floor((characterLevel-1)/4)
 
-AC = 12 ## calculation needs to go here but this'll do for now
+## calculation needs to go in this block but this'll do for now
+AC = 12
 ACExp = "10 Unarmoured + 2 Dexterity" ## this will prolly be it's own function tbh
 WeaponChoiceStr = "Quarterstaff" ## calc from new variable to be stored
 maxHP = 48 ## calc from hp rolls and CON
@@ -117,6 +118,7 @@ speed = [25, 50] ## calc from race 2nd in array for flight speed
 hitDice = "7d6" + " /LR"  ## calc from how many levels in a class (per long rest as they regen)
 backgroundStr = "Merchant"
 
+## lump into array so it's easy to call it all in one line later on (CURSE YOU LACK OF SWITCH STATEMENT)
 miscInfo = ["Max HP: " + str(maxHP), "AC: " + str(AC) + " = " + ACExp, "Held Weapon: " + WeaponChoiceStr, "Speed: " + str(speed), "Hit Dice: " + hitDice, "Backgroud: " + backgroundStr]
 
 ## and the fun begins (each new line has a space between) but this is where all of the prints go
